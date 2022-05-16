@@ -6671,9 +6671,10 @@ function ensureLocalInstaller(options) {
         }
         if (executablePath === "") {
             core.info(`Checking for cached ${tool}@${version}...`);
-            executablePath = tc.find(installerName, version, ...(options.arch ? [options.arch] : []));
-            if (executablePath !== "") {
+            let executableDirectory = tc.find(installerName, version, ...(options.arch ? [options.arch] : []));
+            if (executableDirectory !== "") {
                 core.info(`Found ${installerName} cache at ${executablePath}!`);
+                executablePath = executableDirectory +"/"+ installerName;
             }
             else {
                 core.info(`Did not find ${installerName} ${version} in cache`);
